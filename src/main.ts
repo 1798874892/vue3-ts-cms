@@ -1,7 +1,24 @@
 import { createApp } from 'vue'
+
+import { globalRegister } from './global'
+import 'normalize.css'
+import './assets/css/index.less'
+
 import App from './App.vue'
 
-createApp(App).mount('#app')
+import router from './router'
+import store from './store'
+import { setupStore } from './store'
 
-console.log('哈哈哈是的阿萨德');
+const app = createApp(App)
 
+// 注册element-plus以及其他
+app.use(globalRegister)
+
+app.use(store)
+setupStore()
+
+// path: /user => user
+app.use(router)
+
+app.mount('#app')
